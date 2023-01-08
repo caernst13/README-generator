@@ -30,11 +30,54 @@ return link;
 
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
-function renderLicenseSection(license) {}
+function renderLicenseSection(license) {
+    var licenseSection = '';
+    if(license !== 'none') {
+        licenseSection = `license: ${license}`
+    }
+    return licenseSection;
+}
 
 // TODO: Create a function to generate markdown for README
-function generateMarkdown(data) {
-  return `# ${data.title}
+function generateMarkdown(response) {
+  return `
+  # ${response.title}
+  ## ${renderLicenseSection(response.license)} ${renderLicenseBadge(response.license)}
+  ### ${renderLicenseLink(response.license)}
+
+
+  ## Table of Content
+  ### [license](#license)
+  ### [discription](#discrition)
+  ### [installation](#instalation)
+  ### [usage](#usage)
+  ### [contribution](#contribution)
+  ### [test](#test)
+  ### [questions](#questions)
+
+  ## discrition
+  ### discrition of the app:
+  ### ${response.discrition}
+
+  ## instalation
+  ### instalation directions are as follows:
+  ### ${response.installation}
+
+  ## usage
+  ### directions for how to use the app are as follows:
+  ### ${response.usage}
+
+  ## contribution
+  ### contribution guidelines are as follows:
+  ### ${response.contribution}
+
+  ## test
+  ### how to test the app:
+  ### ${response.test}
+
+  ## questions
+  ### if you have any questions here is my email and github username
+  ### ${response.github} ${response.email}
 
 `;
 }
