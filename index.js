@@ -85,8 +85,16 @@ const questions = [
     },
     {
         type: 'list',
-        name: 'licens',
+        name: 'license',
         choices: ['none', 'Apache License 2.0', 'GNU General Public License', 'MIT License'],
+        validate: licenseInput => {
+            if (licenseInput) {
+                return true;
+            } else {
+                console.log('please enter select an option')
+                return false;
+            }
+        }
     },
 ];
 
@@ -95,8 +103,13 @@ function writeToFile(fileName, data) {}
 
 // TODO: Create a function to initialize app
 function init() {
-    inquirer.prompt(questions);
+    inquirer.prompt(questions).then((response) => {
+        var content = generateMarkdown(response)
+        writeToFile(content)
+    });
 }
 
 // Function call to initialize app
 init();
+
+module.exports = questions
